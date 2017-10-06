@@ -1,1 +1,1 @@
-# bro configs
+# bro scripts and configs
