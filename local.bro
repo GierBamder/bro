@@ -15,3 +15,11 @@ redef Intel::read_files += {
   Log::disable_stream(Syslog::LOG);
   Log::disable_stream(Weird::LOG);
 }
+
+# Add worker source to conn.log
+redef record Conn::Info += {
+        peer_descr: string &default="unknown" &log;
+};
+event connection_state_remove(c: connection){
+        c$conn$peer_descr = peer_description;
+}
