@@ -1,0 +1,73 @@
+bro is a domain specific language (DSL)
+
+bro simply listens to network traffic without its scripting language and scripts
+
+DSL types allow:
+    -an optimized solution that provides a uniform type interface
+    -emphasis on orthogonality - all features work well together
+    -overall simplification
+
+DSL Type - time
+    -A temporal type representing an absolute time. There is currently no way to specify a time constant, but one can use the 
+    double_to_time, current_time, or network_time built-in functions to assign a value to a time-typed variable.
+
+    -Time values support the comparison operators (==, !=, <, <=, >, >=). A time value can be subtracted from another time
+    value to produce an interval value. An interval value can be added to, or subtracted from, a time value to produce a time value.
+    The absolute value of a time value is a double with the same numeric value.
+
+
+DSL Type - interval
+    -A temporal type representing a relative time.
+
+    -An interval constant can be written as a numeric constant followed by a time unit where the time unit is of used, msed, sec,
+    min, hr, or day which respectively represent microseconds, milliseconds, seconds, minutes, hours, and days.
+    Whitespace between the numeric constant and time unit is optional. Appending the letter "s" to the time unit in order to pluralize it
+    is also optional (to no semantic effect). Examples of interval constants are 3.5 min and 3.5mins. An interval can also be negated, for example
+    -12 hr represents "twelve hours in the past".
+
+    -Examples: 2 mins, 3 secs, 2 sec, 4 hr, 4 day...
+    
+    -Intervals support addition and subtraction, the comparison operators
+
+DSL Type - pattern
+    -A type representing regular-expression patterns which can be used for fast text-searching operations. Pattern constants are created by enclosing text within forward slashes /xxx/ and is the 
+    same syntax as the patterns supported by the Fast Lexical Analyzer (Flex). The speed of regular expression matching does not depend on the complexity or size of the patterns. Patterns support two
+    types of matching, exact and embedded.
+
+    -In exact matching the == equality relational operator is used with one "pattern" operand and one "string" operand (order of operands does not matter) to check whether the full string
+    exactly matches the pattern. In exact matching, the ^ beginning-of-line and $ end-of-line anchors are redundant since the pattern is implicitly anchored to the beginning and end of the line to 
+    facilitate an exact match.
+
+DSL Type - port
+    -A type representing transport-level port numbers (besides TCP and UDP ports, there is a concept of an ICMP "port" where the source port is the ICMP message type and the destination port the ICMP message code).
+        -A port constant is written as an unsigned integer followed by one of /tcp, /udp, /icmp, or /unknown.
+        -Examples: 80/tcp, 25/tcp, 53/udp
+
+    -Ports support the comparison operators (==, !=, <, <=, >, >=).
+    When comparing order across transport-level protocols, unknown < tcp < udp < icmp, for example 65535/tcp is smaller than 0/udp.
+
+    -Note that you can obtain the transport-level protocol of a port with the get_port_transport_proto build-in function, and the numeric value of a port with the port_to_count built-in function.
+
+DSL Type - addr (I)
+    -A type representing an IP address
+
+    -IPv4 address constants are written in "dotted quad" format, A1.A2.A3.A4, where Ai all lie between 0 and 255.
+
+    -IPv6 address constants are written as colon-separated hexadecimal form as described by RFC 2373 (including the mixed notation wiht embedded IPv4 addresses as dotted-quads in the lower 32 bits),
+    but additionally encased in square brackets. Some examples: [2001:db8::1], [::ffff:192.168.1.100], or [aaaa:bbbb:cccc:dddd:eeee:ffff:1111:2222].
+
+DSL Type - addr (II)
+    -Note that IPv4-mapped IPv6 addresses (i.e., addresses with the first 80 bits zero, the next 16 bits one, and the remaining 32 bits are the IPv4 address) are treated internally as IPv4 addresses (for example,
+    [::ffff:192.168.1.100] is equal to 192.168.1.100).
+
+    -Addresses can be compared for equality (==, !=), and also for ordering (<, <=, >, >=). The absolute value of an address gives the size in bits (32 for IPv4, and 128 for IPv6).
+
+    -Note that hostname constants can also be used, but since a hostname can correspond to multiple IP addresses, the type of such a variable is "set[addr]". 
+    For example: local a = www.google.com;
+
+DSL Type - subnet
+    -A type representing a block of IP addresses in CIDR notation. A subnet constant is written as an addr followed by a slash (/) and then athe network prefix size specified as a decimal number. For example, 192.168.0.0/16 or [fe80::]/64.
+
+    -Subnets can be compared for equality (==, !=). An "addr" can be checked for inclusion in a subnet using the in or !in operators.
+
+
