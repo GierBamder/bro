@@ -9,7 +9,7 @@ function enum_set(s: set[string]) {
 function enum_vector(v: vector of string) {
     for (idx in v) {
         print idx; # prints the position(index).
-        print fmt(idx = %d, element %s", idx, v[idx]); # prints the elements in the indicies.
+        print fmt("idx = %d, element = %s", idx, v[idx]); # prints the elements in the indicies.
     }
 }
 

@@ -1,0 +1,31 @@
+# switch and fallthrough
+
+- Similar to other languages implementing switch statements.
+
+- A switch statement evaluates a given expression and jumps to the first case label which contains a matching value 
+(the result of the expression must be type-compatible with all of the values in all of the case labels). If there is no matching value,
+then execution jumps to the default label instead, and if there is no default label then execution jumps out of the switch block.
+
+Example:
+
+function test_even_or_odd(c: count){
+    switch (c % 2){
+        case 0:
+            print fmt("c = %d is Even", c);
+            break;
+        default:
+            print fmt("c = %d is Odd", c);
+            break;
+    }
+} 
+
+
+- A switch block can have any number of case labels, and one optional default label.
+
+- A case label can have a comma-sepearated list of more than one value. A value in a case label can be an expression, but it must be a
+constant expression (i.e., the expression can consist only of constants).
+
+- Each case and the default block must end with either a break, fallthrough, or return statement (although return is allowed only if
+the switch statement is inside a function, hook, or event handler).
+
+
