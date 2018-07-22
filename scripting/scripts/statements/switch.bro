@@ -28,7 +28,7 @@ function test_divisibility(c: count){
 
 event bro_init()
 {
-	test_even_or_odd(2);
+    test_even_or_odd(2);
     test_even_or_odd(3);
 
     test_divisibility(2);
