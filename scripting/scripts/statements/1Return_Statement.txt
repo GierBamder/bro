@@ -1,0 +1,9 @@
+The return statement immediately exits the current function, hook, or even handler.
+
+    For a function, the specified expression (if any) is evaluated and returned.
+
+    A return statement in a hook or event handler cannot return a value bacause event handlers and hooks
+    do not have return types. Treat a return, in this situation, as a short-circuit in the execution
+    and a possible processing optimization - test early, return early.
+
+
