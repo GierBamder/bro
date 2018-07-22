@@ -10,13 +10,13 @@ Switch Example:
 
 function test_even_or_odd(c: count){
     switch (c % 2){
-		case 0:
-			print fmt("c = %d is Even", c);
-			break;
-		default:
-			print fmt("c = %d is Odd", c);
-			break;
-	}
+        case 0:
+            print fmt("c = %d is Even", c);
+            break;
+        default:
+            print fmt("c = %d is Odd", c);
+            break;
+    }
 } 
 
 
@@ -31,30 +31,15 @@ the switch statement is inside a function, hook, or event handler).
 Fallthrough Example:
 
 function test_divisibility(c: count){
-	switch (c % 4){
-		case 0:
-			print fmt("c = %d is divisible by 4 evenly",c);
-			fallthrough;
-		case 2:
-			print fmt("c = %d is divisible by 2 evenly", c);
-			break;
-		default:
-			print fmt("c = %d is Odd",c);
-			break
-	}
+    switch (c % 4){
+        case 0:
+            print fmt("c = %d is divisible by 4 evenly",c);
+            fallthrough;
+        case 2:
+            print fmt("c = %d is divisible by 2 evenly", c);
+            break;
+        default:
+            print fmt("c = %d is Odd",c);
+            break
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

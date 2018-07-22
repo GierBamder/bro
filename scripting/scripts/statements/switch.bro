@@ -1,13 +1,13 @@
 
 function test_even_or_odd(c: count){
-	switch ( c % 2){
-		case 0:
-			print fmt("c = %d is Even", c);
-			break;
-		default:
-			print fmt("c = %d is Odd", c);
-			break;
-	}
+    switch ( c % 2){
+        case 0:
+            print fmt("c = %d is Even", c);
+            break;
+        default:
+            print fmt("c = %d is Odd", c);
+            break;
+    }
 }
 
 function test_divisibility(c: count){
