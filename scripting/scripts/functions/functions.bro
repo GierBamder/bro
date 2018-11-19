@@ -23,7 +23,7 @@ function mycat(a: string, b: string): string
 
 event bro_init()
 {
-	print "mycat(a, b_ -  ", mycat("a", "b");
+	print "mycat(a, b)", mycat("a", "b");
 	print "mycat(just a, ) = ", mycat("just a", "");
 	print "mycat(, just b) = ", mycat("", "just b");
 	print "mycat(,) = ", mycat("", "");
