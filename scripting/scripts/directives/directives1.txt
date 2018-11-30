@@ -1,0 +1,68 @@
+Overview
+
+-The bro scripting languae supports a number of directives that can affect which scripts will be loaded or which lines in a script will be executed.
+
+-Directives are evaluated before script execution begins.
+
+	-Directives are preprocessor macros by any other name.
+
+	-Exactly like #include in C
+
+
+@DIR - Expands to the directory pathname where the current script is located.
+@FILENAME - Expands to the filename of the current script.
+@load - Loads the specified bro script.
+@load-plugin - Activate a dymanic plugin with the specified plugin name.
+@load-sigs - This works similarly to "@load", except that in this case the filename represents a signature file (not a bro script).
+@unload - This specifies a bro script that we don't want to load (so a subsequent attempt to load the specified script will be skipped).
+@prefixes - Specifies a filename prefix to use when looking for script files to load automatically. The prefix cannot contain any whitespace.
+@if / @else / @endif - The specified expression must evaluate to type bool. If the value is true, then the following script lines (up to the next "@else" or "@endif") are available to be executed.
+@ifdef - This works like "@if", except that the result is true if the specified identifier is defined.
+@ifndef - This works exactly like the "@ifdef", except that the result is true if the specified identifier is not defined.
+
+#Directive: @load
+
+-Loads the specified bro script, specified as the relative pathname of the file or a directory.
+
+-If the bro script filenames ends with ".bro", then you don't need to specify the file extention.
+
+-The filename cannot contain any whitespace.
+
+Example:
+@load policy/misc/scan.bro
+
+-Bro will try to load the script by looking in the file search path, which is defined in the environment variable BROPATH.
+
+-If a directory name is specified, instead of a filename then bro will attempt to load the file __load__.bro
+
+-By convention, __load__.bro supsequently @load's all required scripts in the directory
+
+
+-The purpose of this directive is to ensure that all script depencencies are satisfied, and to avoid having to list every needed bro script on the command-line.
+Bro keeps track of which scripts have been loaded, so it is not an error to load a script more than once.
+Thus, once a script has been loaded, any subsequent @load directives for that script are ignored.
+
+
+#Directive: @unload
+
+-This specifies a bro script that we do not want to load. So a subsequent attemtp to load the specified script will be skipped.
+
+-However, if the specified script has already been loaded, then this directive has no affect.
+
+Example:
+@unload policy/misc/scan.bro
+
+-Provided scan.bro is not already loaded, prevents it from being loaded.
+
+#Directive @DIR
+
+-Expands to the directory pathname where the current script is located.
+
+-Often used to load intelligence or other data that is co-located with a script
+
+Example:
+
+@load frameworks/intel/seen
+redef Intel::read_files += {
+    fmt("%s/intel-1.dat", @DIR_
+};

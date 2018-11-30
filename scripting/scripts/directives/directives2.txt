@@ -1,0 +1,69 @@
+# Directive: @FILENAME
+
+-Expands to the filename of the current script.
+
+Example:
+
+print "File:", @FILENAME;
+
+
+# Directive: @if / @else / @endif
+
+-The specified expression must evaluate to type bool. If the value is true, then the following script lines, up to the next @else or @endif, are availabe to be executed.
+
+@if (ver == 2)
+    print "version 2 detected";
+@else
+    print "Defaulting to non-v2";
+@endif
+
+-Note: @endif is mandatory for closing an @if
+
+# Directive: @load-plugin
+
+-Activate a dymanic plugin with the specified plugin name.
+
+-The specified plugin must be located in bro's plugin search path.
+
+Example:
+@load-plugin Training::SpecialProto
+
+-By default, bro will automatically activate all dynamic plugins found in the plugin search path. The search path can be changed by setting the environment variable BRO_PLUGIN_PATH to a colon-separated list of directories.
+
+-In bare mode ("bro -b"), dynamic plugins can be activated only by using @load-plugin, or by specifying the full plugin name on the bro command line (e.g., "bro Demo::Rot13"), or by setting the environment variable BRO_PLUGIN_ACTIVATE to a comma separated list of plugin names.
+
+# Directive: @load-sigs
+
+-This works similarly to "@load", except that in this case the filename represents a signature file (not a bro script). If the sig filename ends with ".sig", then you don't need to specify the file extension in the "@load-sigs" directive.
+
+-The filename cannot contain any whitespace.
+
+Example:
+@load-sigs base/protocols/ssl/dpd
+
+-Most often used with a protocol analyzer.
+
+# Directive: @ifdef
+
+-This works like @if, except that the result is true if the specified identifier is defined.
+
+Example:
+@ifdef (SOMESCRIPT::available)
+    print "SOMESCRIPT::available ready";
+@endif
+
+-@else directives may be used with @ifdef
+
+
+# Directive: @ifndef - "if not defined"
+
+-This works exactly like @ifdef, exceept that the result is true if the specified identifier is not defined.
+
+Example:
+@ifndef (SOMESCRIPT::available)
+    print "SOMESCRIPT::available is not";
+@endif
+
+@else directives may be used with ifndef
+
+
