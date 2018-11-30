@@ -14,8 +14,7 @@
 #
 #}
 
-# Exercise
-#
+# Exercise:
 #    Name the module S951.
 #    Declare the event bro_init() event handler.
 #    Declare a new exported record type Info containing the fundamental record entries: timestamp, id and uid. Add to it another record entry that is a string called “uri”.
