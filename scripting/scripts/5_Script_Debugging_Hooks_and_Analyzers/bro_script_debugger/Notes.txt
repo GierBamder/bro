@@ -1,0 +1,12 @@
+gdb for bro scripts
+-Script-land debugging only
+
+-Breakpoints
+
+-Flow control
+
+-State/value examination
+
+-May be used on live traffic, but not recommended.
+
+
