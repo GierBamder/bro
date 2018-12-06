@@ -1,0 +1,67 @@
+# print - Statement
+The print statement takes a comma-separated list of one of more expressions. Each expression in the list is evaluated and then converted to a string.
+Then each string is printed, with each string separated by a comma in the output.
+    print 12345;
+    print "Testing 1 2 3";
+    print "Debugging here...";
+
+By default, the print statement writes to the standard output (stdout). However, if the first expression is of type file, then print writes to that file.
+
+If a string contains non-printable characters (i.e., byte values that are not in the range 32 - 126), then the print statement converts each non-printable character to an
+escape sequence before it is printed.
+
+
+# fmt - print Statement Control
+Very similar to C's printf().
+
+The first argument is the format string and specifies how subsequent arguments are converted for output. It is composed of zero or more directives: ordinary characters (not %), which are 
+copied unchanged to the output, and conversion specifications, each of which fetches zero or more subsequent arguments. Conversion specifications begin with % and the arguments must
+properly correspond to the specifier.
+
+fmt(), can be used to format any string returned or used in a bro script - i.e. in a NOTICE, etc.
+
+-After the %, the following characters may appear in sequence:
+
+-------------------------------------------------------------------------------------------
+    Sequence   |  Meaning
+-------------------------------------------------------------------------------------------
+    %          |  Literal %
+    -          |  Left-align Field
+    [0-9]+     |  The field width (<128)
+    .          |  Precision of floating point specifiers [eft](<128)
+    [DTdxsefg] |  DT: ISO timestamp with microsecond precision. Date/Time
+               |  d: Signed/Unsigned integer (using C-style %lld/%llu for int/count). Digit
+               |  x: Signed/Unsigned integer (using C-style %lld/%llu for int/count). Hex
+               |  s: String (byte values less than 32 or greater than 126 will be escaped)
+               |  [efg]: Double. Floating point values
+-------------------------------------------------------------------------------------------
+
+#Example:
+event bro_init()
+{
+    print fmt("%DT", network_time());
+
+    print fmt("%s", "This is a test of fmt");
+
+    print fmt("0X%x", 0x12345678);
+
+    print fmt("%d", 12345678);
+
+    print fmt("%e", 1234123412341234);
+
+    print fmt("%e", 1234123412341234);
+
+    print fmt("%f", 1234123412341234);
+
+    print fmt("%g", 1234123412341234);
+
+}
+
+#Output
+#2018-06-12-12:35:31T
+#This is a test of fmt
+#0X12345678
+#12345678
+#1.234123e+10
+#12341234123412.339844
+#1.23412e+10

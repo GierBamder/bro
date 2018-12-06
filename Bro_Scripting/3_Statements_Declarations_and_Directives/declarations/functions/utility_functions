@@ -1,0 +1,22 @@
+-Utility functions represent a collection of default bro script-based functions that may be used as necessary
+-Great reference material.
+
+base/utils/site.bro - Definitions describing a site - which networks and DNS zones are "local" and "neighbors", and servers running particular services.
+
+base/utils/patterns.bro - Functions for creating and working with patterns.
+
+base/utils/active-http.bro - A module for performing active HTTP requests and getting the reply. This is a Hog in production.
+
+base/utils/exec.bro - A module for executing external command line programs. This is a Hog in production.
+
+base/utils/addrs.bro - Functions for parsing and maniuplating IP and MAC addresses.
+
+base/utils/conn-ids.bro - Sample functions for generating ASCII strings from cnonections IDs.
+
+base/utils/directions-and-hosts.bro - Check directionality of connections and host types (LOCAL, REMOTE, ...)
+
+base/utils/queue.bro - A FIFO queue.
+
+base/utils/strings.bro - Functions to assist with small string analysis and manipulation (non-BIFs)
+
+base/utils/urls.bro - Functions for URL handling.

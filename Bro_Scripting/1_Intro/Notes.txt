@@ -1,0 +1,198 @@
+    Course Introduction
+        Review Student Agreement
+        Course Welcome Video
+        Course Content Introduction
+        Introduce Yourself!
+    Introduction to Bro
+    Bro Overview and Lab Setup
+        Introduction to Bro
+        The Bro Training Environment
+        Lab Setup - VMWare and VirtualBox
+        Lab Setup - Docker
+        Lab Setup - TryBro
+        Lab Setup - Bro Script Editors
+    Bro Fundamentals
+        Bro Command Line Arguments
+        Directory Hierarchy
+        Scripting Overview
+        General Structure and Syntax
+        Operators
+        QUIZ: Operator Gymnastics
+    Namespaces, Types, Variable Declaration, and Attributes
+    Namespaces
+        Introduction to Namespaces
+        Local Namespace
+        Global Namespace
+        Constant Namespace
+        Local vs. Global vs. Constant
+        Export vs. Non-Export
+    Types
+        Introduction to Types and Basic Types Overview
+        Sets
+        Vectors
+        Sets vs. Vectors
+        LAB - Sets vs. Vectors
+        LAB SOLUTION - Sets vs. Vectors
+        Tables
+        LAB - Declaring, Accessing, and Deleting Tables
+        LAB SOLUTION - Declaring, Accessing, and Deleting Tables
+        Records
+        More on Records and Tables
+        LAB - Record Implementation and Usage
+        LAB SOLUTION - Record Implementation and Usage
+        Regular Expressions
+    Variable Declaration
+        Variable Declaration Intro
+        Declaring Local Variables
+        Declaring Global Variables
+        Declaring Constant Variables
+        Variable Declaration Demonstration
+        LAB - Build a Counter
+        LAB SOLUTION - Build a Counter
+    Domain Specific Language (DSL) Types
+        Intro the Bro DSL Types
+        DSL Types - Time and Interval
+        DSL Types - Pattern
+        DSL Types - Port
+        DSL Types - Address
+        DSL Types - Subnet
+        Fundamental Type Demo - Part 1
+        Fundamental Type Demo - Part 2
+        LAB - Fundamental Types
+        LAB SOLUTION - Fundamental Types
+    Attributes
+        Attributes Introduction
+        Attributes Demo
+    Statements, Declarations, and Directives
+    Statements
+        Introduction to Statements
+        If Statements
+        Loops - For, While, Next, and Break
+        Practical Usage of Loops
+        LAB - Using Loops to Enumerate Tables, Sets, and Vectors
+        LAB SOLUTION - Using Loops to Enumerate Tables, Sets, and Vectors
+        Print and FMT
+        Switch Statements and Fallthrough
+        LAB: Using Switch Statements
+        LAB SOLUTION: Using Switch Statements
+        Return Statements
+        When Statements
+    Declarations
+        Function Declaration
+        Function Declaration and Scoping Demo
+        Built-in Function (BIFs)
+        LAB - Building your own Function
+        LAB SOLUTION - Building your own Function
+        Utility Functions
+    Directives
+        Introduction to Directives
+        Load and Unload Directives
+        DIR and Filename Directives
+        If, Else, and Endif Directives
+        Load-plugin and Load-sigs Directives
+        Ifdef and Ifndef Directives
+        Directives Demo
+    Logs and Events
+    Bro Logs
+        Introduction to Bro Logs
+        Stdout and Stderr Logs
+        Reporter Log
+        Weird Log
+        Designing a Custom Log File
+        Debugging a Log
+        The Logging Framework
+        Writing to a Log
+        Logging Performance Considerations
+        Building a Log from Scratch Demo
+        Disabling Logs
+        LAB - Disabling Logs
+        LAB SOLUTION - Disabling Logs
+        LAB - Designing a Log from Scratch
+        LAB SOLUTION - Designing a Log from Scratch
+    Bro Events
+        Events and Event-Driven Development
+        LAB - Using Events to Design an Analyzer Script
+        LAB SOLUTION - Using Events to Design an Analyzer Script
+    Checkpoint - The Fundamentals
+        LAB - Fundamentals Test
+        LAB SOLUTION - Fundamentals Test
+    Script Debugging, Hooks, and Analyzers
+    Bro Script Debugger
+        Bro Script Debugger Overview
+        Bro Script Debugger Demo
+    Hooks
+        Hooks Overview
+        Hooks Demo
+    Analyzers
+        Analyzers Overview
+        Interacting with and Disabling Analyzers Demo
+        LAB - Disable Analyzers Based on Exported Redef'able Global Set
+        LAB SOLUTION - Disable Analyzers Based on Exported Redef'able Global Set
+    Bro Frameworks
+    Notice Framework
+        Introduction to Notices
+        Creating a Notice Demo - SSH Login from Interesting IP
+        Suppressing Notices and Notice Policy Hooks
+        Interpreting and Extending the SSH Interesting Login Notice Demo
+        LAB - Implement a Notice for a Large HTTP Flow
+        LAB SOLUTION - Implement a Notice for a Large HTTP Flow
+        LAB - Implement a Notice Policy Hook to Change Formatting of a Message
+        LAB SOLUTION - Implement a Notice Policy Hook to Change Formatting of a Message
+    Intelligence Framework
+        Intel Framework Introduction
+        Integrating Critical Stack Feeds
+        Intel Framework Cautions, Linter, and CIF
+        Loading Intel Demonstration
+    File Analysis Framework
+        File Analysis Framework Introduction
+        En Masse File Extraction
+        File Analysis Events and Functions
+        Selective Extraction and Troubleshooting
+        File Analysis Framework Demonstration
+        LAB - Extracting Specific File Types
+        LAB SOLUTION - Extracting Specific File Types
+    Input Framework
+        Intro to the Input Framework
+        Events, Functions, Modes, and Arguments
+        Input Framework Example and Filtering
+        Input Framework Demonstration
+        LAB - Use the Input Framework to Disable Analyzers
+        LAB SOLUTION - Use the Input Framework to Disable Analyzers
+    Summary Statistics Framework
+        Intro to the Sumstats Framework
+        SumStats Example
+        SumStats Demonstration
+        LAB - Using SumStats to Calculate HTTP Method Ratio
+        LAB SOLUTION - Using SumStats to Calculate HTTP Method Ratio
+    Conn Threshold Framework
+        Intro to the Conn Threshold Framework
+        Conn Threshold Demonstration
+        LAB - Generating a Notice Using the Conn Threshold Framework
+        LAB SOLUTION - Generating a Notice Using the Conn Threshold Framework
+    Practical Bro Development
+    Filtering
+        Filtering in Bro
+        Excluding HTTP Requests without Referrers Demo
+        LAB: Filter DNS Logs
+        LAB SOLUTION: Filter DNS Logs
+        LAB: Split DNS Logs Dynamically
+        LAB SOLUTION: Split DNS Logs Dynamically
+    Designing your Own Events
+        How to Design your Own Events
+        Write Your Own Events Using Schedule Demonstration
+        LAB: Creating a Custom Event Using Two Scripts
+        LAB SOLUTION: Creating a Custom Event Using Two Scripts
+        LAB: Extending the Custom Event with the Priority Attribute
+        LAB SOLUTION: Extending the Custom Event with the Priority Attribute
+        LAB: Using Schedule in your Event
+        LAB SOLUTION: Using Schedule in your Event
+    Debugging and Optimizing with Additional Logs
+        Debugging Logs - Prof, Capture Loss, and Stats
+        Interacting with Debugging Logs Demonstration
+    Course Conclusion
+    Final Lab
+        LAB: Locating SSH Sessions
+        LAB SOLUTION: Locating SSH Sessions
+    Course Wrap Up
+        Beyond this Course
+        Final Course Survey
