@@ -9,13 +9,58 @@ gdb for bro scripts
 
 -May be used on live traffic, but not recommended.
 
-# Breakpoints - Setting
 
+# Breakpoints - Setting
+----------------------------------------------------------------------------
 Command                         Description
+----------------------------------------------------------------------------
 break <line number>             Set breakpoint at current location
 break <filename>:<line number>  Break at <line number> of current file
 break <function or event name>  Break at <line number> of <filename>
 break <function or event name>  Break on <function or event name>
 break <function or event>*      Break on <function or event name> wildcard
+----------------------------------------------------------------------------
 
 
+# Breakpoints - Control
+----------------------------------------------------------------------------
+Command                         Description
+----------------------------------------------------------------------------
+info breakpoints                List all breakpoints
+enable <number> (en)            Enable breakpoint <number>
+disable <number> (dis)          Disable breakpoint <number>
+delete <number>                 Delete breakpoint <number>
+continue ( c )                  Continue execution
+Control-C                       Break into execution
+----------------------------------------------------------------------------
+
+
+# Flow Control
+----------------------------------------------------------------------------
+Command                         Desctiption
+----------------------------------------------------------------------------
+cond <number> <condition>       Add <condition> to breakpoint <number>
+step                            Next line - Do enter functions
+next (n)                        Execute next line - Won't enter functions
+finish                          Run until the end of the current function
+----------------------------------------------------------------------------
+
+
+# State / Value Examination
+----------------------------------------------------------------------------
+Command                          Description
+----------------------------------------------------------------------------
+list                             Show up to 10 lines of code
+list <n>                         Show +/- 5 lines around line <n>
+list <file>:<n>                  List +/- 5 lines in <file> around line <n>
+list <function/event>            List +/- 5 lines around <function/event>
+print <expression>               Evaluate and print <expression>
+backtrace                        Print a stack trace (with +- N argument, inner/outer N frames only)
+frame <n>                        Select frame number N
+up                               Select the stack frame one level up
+down                             Select the stack frame one level down
+----------------------------------------------------------------------------
+
+
+# Run the debugger
+bro -C -d -r http.pcap debugger.bro

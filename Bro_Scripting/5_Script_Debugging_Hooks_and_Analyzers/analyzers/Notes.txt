@@ -1,0 +1,70 @@
+# Overview
+
+Analyzers decode a chain of packets into a connection
+
+Protocol analyzers use Dynamic Protocol Detection (DPD) to accelerate their confirmation
+
+-DPD uses a unique signature to determine, quickly, what order to execute an analyzer in
+	-regex based
+
+
+# Analyzer Trees
+
+An analyzer tree is associated with every connection. This tree can contain an arbitrary number of analyzers in various constellations and can be modified during the whole lifetime of a connection, i.e., we can enable/disable analyzers on the fly. Most importantly, this gives us two new capabilities:
+
+# DPD Features
+
+-Protocol analysis is independent of ports. By using a set of signatures which match typical protocol dialogues, bro is now able to look at payloads to find the correct analyzers. When such a signature matches, it turns on the corresponding analyzer.
+
+-Analyzers can be turned off when it becomes obvious that they are parsing the wrong protocol. This allows us to use rather loose protocol signatures and, if in doubt, try multiple analyzers in parallel.
+
+
+# Examples
+-----------------------------------------------------------------------------------------------
+Analyzer           Tag                           Description
+-----------------------------------------------------------------------------------------------
+HTTP               Analyzer::ANALYZER_HTTP       HTTP Protocol
+SMB                Analyzer::ANALYZER_SMB        SMB Protocol
+FTP                Analyzer::ANALYZER_FTP        FTP - Command Stream
+FTP_DATA           Analyzer::ANALYZER_FTP_DATA   FTP Data Analysis - Actual file transfer stream
+KRB                Analyzer::ANALYZER_KRB        Kerberos Protocol (UDP)
+KRB_TCP            Analyzer::ANALYZER_KRB_TCP    Kerberos Protocol (TCP)
+SYSLOG             Analyzer::ANALYZER_SYSLOG     Syslog Protocol
+RDP                Analyzer::ANALYZER_RDP        Remote Desktop Protocol
+-----------------------------------------------------------------------------------------------
+
+
+# Disabling Analyzers
+
+Protocol does not exist on network segment at all, thus slowing down analysis
+
+-Upstream shunting
+
+-Extremely terse firewall rules
+
+Encryptiojn protocol is the subject of analysis
+
+-No means of decrypting protocol inline
+
+Performance and resource limitations
+
+-Syslog
+
+-SNMP
+
+# Usage
+
+-Function prototype
+
+global disable_analyzer: function(tag: Analyzer::Tag):
+bool;
+
+-Example
+
+event bro_init()
+{
+	Analyser::disable_analyzer(Analyzer::ANALYZER_SYSLOG);
+}
+
+
+

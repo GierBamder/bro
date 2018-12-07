@@ -1,0 +1,37 @@
+# Overview
+Hooks are yet another flavor of function. They are similar to events in that they can also have multiple bodies. However they are different in two regards:
+
+-They do execute immediately when invoked.
+
+-The way the body of a hook handler terminates determines if further handlers get executed. If the end of the body, or a return statement,
+is reached, the next hook handler will be executed. If, however, a hook handler body termintates with a break statement, no remaining hook handlers will execute.
+
+-Hooks are useful to provide customization points for modules, as they allow to outsource decisions to site-specific code.
+
+-The return value of a hook call is an implicit bool value with T meaning that all handlers for the hook were executed and F meaning that only some of the handlers may have executed due to one handler body exiting as a result of a break statement.
+
+
+# Usage
+Good as an abstration point for execution decisions
+
+-Think of them as an extended &redef
+
+-Change execution based on computation versus singular on/off switches
+
+May be used to alter the "personality" of the sensor execution
+
+-Small vs. Large sensor configuration
+
+
+# Declaration
+Simple declaration
+
+hook( argument* )
+
+-Where argument is a (possibly empty) comma-separated list of arguments.
+
+-Declaring for global usage
+
+global myhook: hook(s: string)
+
+
