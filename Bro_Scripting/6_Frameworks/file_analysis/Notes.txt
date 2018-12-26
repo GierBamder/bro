@@ -1,0 +1,77 @@
+Generalized, protocol agnostic presentation layer for file-related information (files.log)
+
+File related information is exposed as a set of events along side the typical network-related events
+
+File extraction may be performed either
+
+-En masse
+
+-Selectively
+
+File extraction generally necessitates the use of bro's hashing functionality
+
+
+#En Masse Extraction
+@load frameworks/files/extract-all-files.bro
+
+En Masse File Hashing
+@load frameworks/files/hash-all-files.bro
+
+Considerations of the En Masse Approach
+
+-Do you want to extract all SSL certs?
+-Do you have storage for all artifacts extracted?
+-Can you legally store all file types?
+	-Disposal interval?
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Events and Functions of Interest
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Prototype                                                 Desctiption
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+event file_new(f: fa_file)                                Indicates that an analysis of a new file has begun. The analysis can be augmented at this time via Files::add_analyzer.
+event file_sniff: event(f: fa_file, meta: fa_metadata)    Provide all metadata that has been inferred about a particular file from inspection of the initial content that was seen at the beginning of the file.
+event file_state_remove: event(f: fa_file)                This event is generated each time file analysis is ending for a given file.
+function Files::add_analyzer(f: fa_file,                  Adds an analyzer to the analysis of a given file.
+tag: Files::Tag, args: Files::AnalyzerArgs ...) : bool  
+function Files::remove analyzer (f: fa_file,              Removes the analyzer from the given file
+tag: Files::Tag, args: Files::AnalyzerArgs ...) : bool
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+record fa_file (Abridged)
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Field                            Description
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+id: string                       An identifier associated with a single file.
+source: string                   An identifaction of the source of the file data. E.g. it may be a network protocol over which it was transferred, or a local file path which was read, or some other input source.
+seen_bytes: count                Number of bytes provided to the file analysis engine for the file.
+&default = 0 &optional
+total_bytes: count &optional     Total number of bytes that are supposed to comprise the full file.
+missing_bytes: count             The number of bytes in teh file stream that were completely missed during the process of analysis e.g. due to dropped packets.
+&default = 0 &optional
+bof_buffer: string &optional     The content of the beginning of a file up to bof_buffer_size bytes. This is also the buffer that's used for file/mime type detection.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+#Selective Extraction
+
+Considerations for selective extraction
+
+-Mime type are the key to down-select
+
+https://github.com/bro/bro/tree/master/scripts/base/frameworks/files/magic
+
+	-Pattern matching can be wrong
+
+-Make sure Files::ANALYZER_EXTRACT was added to the fa_file of interest
+
+-Attach the preferred hash analyzer
+
+	-Use it as a unique key or otherwise upstream if needed
+
+	-The fewer, the better - less metadata and less cycles
+
+-Future: Leverage the input framework for selection of file types to extract
+
+

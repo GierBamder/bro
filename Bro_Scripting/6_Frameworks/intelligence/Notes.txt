@@ -1,0 +1,19 @@
+Generalized framework for ingesting third-party threat data into bro
+
+Data in the intel framework is an atomic piece of intel such as an IP address or an email address along with a suite of metadata about it such as a freeform source field, a freeform descriptive field and a URL which might lead to more information about the specific item.
+
+The metadata in the defualt scripts has been deliberately kept minimal so that the community can find the appropriate fields that need to be added by writing scripts which extend the base record using the normal record extension mechanism.
+
+Enabling the intel.log
+@load policy/frameworks/intel/seen
+
+If using the Common Intel Framework
+@load policy/integration/collective-intel
+
+Raise a NOTICE on an intel match
+@load policy/frameworks/intel/do_notice
+
+Bro intel linter
+https://github.com/packetsled/bro_intel_linter
+
+
