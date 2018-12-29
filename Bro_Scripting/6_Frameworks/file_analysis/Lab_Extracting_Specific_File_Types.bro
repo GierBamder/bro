@@ -32,6 +32,8 @@ event file_sniff(f: fa_file, meta: fa_metadata)
     if ( meta$mime_type !in allowable ) {
         return;
     }
+
+    local fname = fmt("%s-%s.EXTRACTED", f$source, f$id);
           
-    Files::add_analyzer(f, Files::ANALYZER_EXTRACT );
+    Files::add_analyzer(f, Files::ANALYZER_EXTRACT, [$extract_filename=fname]);
 }
