@@ -11,7 +11,7 @@ File extraction may be performed either
 File extraction generally necessitates the use of bro's hashing functionality
 
 
-#En Masse Extraction
+# En Masse Extraction
 @load frameworks/files/extract-all-files.bro
 
 En Masse File Hashing
@@ -54,7 +54,7 @@ missing_bytes: count             The number of bytes in teh file stream that wer
 bof_buffer: string &optional     The content of the beginning of a file up to bof_buffer_size bytes. This is also the buffer that's used for file/mime type detection.
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-#Selective Extraction
+# Selective Extraction
 
 Considerations for selective extraction
 
@@ -73,5 +73,8 @@ https://github.com/bro/bro/tree/master/scripts/base/frameworks/files/magic
 	-The fewer, the better - less metadata and less cycles
 
 -Future: Leverage the input framework for selection of file types to extract
+
+
+# Resolving Issues
 
 
