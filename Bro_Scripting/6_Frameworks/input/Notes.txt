@@ -32,4 +32,28 @@ function Input::force_update(id: string) : bool                         Forces t
 event Input::end_of_data(name: string, source: string);                 Event that is called when the end of a data source has been reached, including after an update.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+# Modes
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Mode              Description
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Input::MANUAL     File is not updated after it has been initially read.
+Input::REREAD     The whole file is read again each time a change is found. This should be used for files that are mapped to a table where individual lines can change.
+Input::STREAM     Data from the file is streamed. Events/table entries will be generated as new data is added to the file.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Input::add_table(...) Arguments
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Option        Description
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+$source       A mandatory string identifying the source of the data. For the ASCII reader this is the filename.
+$name         A mandatory name for the filter that can later be used to manipulate it further.
+$idx          Record type that defines the index of the table
+$val          Record type that defines the values of the table reader
+$mode         The mode in which the stream is opened.
+$destination  The destination table
+$ev           Optional event that is raised, when values are added to, changed in or deleted from the table. Events are passed an Input::Event description as the first
+              argument, the index record as the second argument and the values as the third argument.
+$pred         Optional predicate, that can prevent entries fro being added to the table and events fro being sent.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
