@@ -20,6 +20,7 @@
 192.168.27.2    1330235733      Botnet server
 192.168.250.3   1333145108      Virus detected
 
+
 # Events and Functions
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -30,3 +31,5 @@ function Input::add_event(description:Input::EventDescription) : bool   Create a
 function Input::force_update(id: string) : bool                         Forces the current input to be checked for changes.
 event Input::end_of_data(name: string, source: string);                 Event that is called when the end of a data source has been reached, including after an update.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
