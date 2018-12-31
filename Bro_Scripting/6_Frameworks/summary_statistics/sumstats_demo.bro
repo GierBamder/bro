@@ -10,7 +10,7 @@ event bro_init() &priority=5
 			return result["excess.queries"]$sum;
 		},
 		$threshold_crossed(key: SumStats::Key, result: SumStats::Result) = {
-			print fmt("%s had too many queries!", key$host);
+			print fmt("%s had too many responses!", key$host);
 		}
 	]);
 }
@@ -19,7 +19,7 @@ event http_message_done(c: connection, is_orig: bool, stat: http_message_stat) &
 {
 	if (! is_orig) {
 		if ( c$http?$uri ) {
-			SumStats::observe("excess.queries", SumStats::Key($host=c$id$orig_h),
+			SumStats::observe("excess.queries", SumStats::Key($host=c$id$resp_h),
                                                              SumStats::Observation($str=c$http$uri));
 		}
 	}
