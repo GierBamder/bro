@@ -1,0 +1,48 @@
+# SumStats
+
+# Overview
+-Summary statistics (otherwise referred to as SumStats) framework aims to define a mechanism for consuming unbounded data sets and making them measurable in practice on large clustered and non-clustered bro deployments.
+
+-Bro's version of mapreduce
+
+# Processing Flow
+
+1. Observations, a single point of data. Observations have a few components of their own. They are part of an arbitrarily named observation stream, they have a key that is something the observation is about, and the actual observation itself.
+
+2. Reducers, where observations are collected and measured, typically by taking some sort of summary statistic measurement like average or variance (among others).
+
+3. Sumstats, where reducers have an epoch (time interval) that their measurements are performed over along with callbacks for monitoring thresholds or viewing the collected and measured data.
+
+
+# SumStats Calculations
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Type                  Description
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+SumStats::AVERAGE     Calculate the average of the values
+SumStats::HLL_UNIQUE  Calculate the number of unique values. (HyperLogLog Algorithm)
+SumStats::LAST        Keep the last X observations in a queue
+SumStats::MAX         Find the maximum value
+SumStats::MIN         Find the minimum value
+SumStats::SAMPLE      Get uniquely distributed random samples from the observation stream
+SumStats::VARIANCE    Calculate the variance of the values
+SumStats::STD_DEV     Calculate the standard deviation of the values
+SumStats::SUM         Calculate the sum of the values. For string values, this will be the number of strings
+SumStats::TOPK        Keep a top-k list of values
+SumStats::UNIQUE      Calculate the number of unique values
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Considerations
+
+-Longer epochs, require longer retention of data
+    -Minimize what's being tracked
+    -Make the epoch an appropriate interval
+
+-Data is retained in memory
+
+-Will increase cluster communication
+
+-Minimize the total number of SumStat instantiations
+	-Understand your entire depoloyment profile
+	-Evauluate SumStat artifacts overtime and determine their usefulness moving forward
+
+
