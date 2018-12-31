@@ -1,0 +1,33 @@
+# Overview
+
+-Implements a generic API to throw events when a connection crosses a fixed threshold of bytes or packets.
+
+-Coupled with the bulk policy scripts, it can deal with shunting cleanly
+	-Call exteernal utilities
+	-Disable analyzers for a connection
+	-skip_further_processing() of a connection
+
+# Bulk connections and Shunting
+
+-Bulk connections are defined as:
+	-Connections lasting a protracted period of time while transferring data
+	-Connections sending large amounts of data in a finite window
+
+-Shunting is defined as:
+	-Disabling a protocol analyzer to reduce resource usage
+	-Completely disabling the tracking of a connection
+
+
+# Events and Functions
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Events/Functions                                                                                       Descriptions
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+event ConnThreshold::bytes_threshold_crossed (c: connection, threshold: count, is_orig: bool           Generated for a connection that crossed a set byte threshold
+event ConnThreshold::packets_threshold_crossed (c: connection, threshold: count, is_orig: bool         Generated for a connection that crossed a set byte threshold
+function ConnThreshold::set_bytes_threshold (c: connection, threshold: count, is_orig: bool) : bool    Sets a byte threshold for connection sizes, adding it to potentially already existing thresholds.
+                                                                                                       conn_bytes_threshold_crossed will be raised for each set threshold
+function ConnThreshold::set_packets_threshold (c: connection, threshold: count, is_orig: bool) : bool  Sets a packet threshold for connection sizes, adding it to potentially already existing thresholds.
+                                                                                                       conn_packets_threshold_crossed will be raised for each set threshold.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+

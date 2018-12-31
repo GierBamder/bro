@@ -1,0 +1,12 @@
+#separator \x09
+#set_separator	,
+#empty_field	(empty)
+#unset_field	-
+#path	conn_bulk
+#open	2018-12-31-15-22-01
+#fields	ts	uid	id.orig_h	id.orig_p	id.resp_h	id.resp_p	proto	service	duration	orig_bytes	resp_bytes	conn_state	local_orig	local_resp	missed_bytes	history	orig_pkts	orig_ip_bytes	resp_pkts	resp_ip_bytes	tunnel_parents
+#types	time	string	addr	port	addr	port	enum	string	interval	count	count	string	bool	bool	count	string	count	count	count	count	set[string]
+1258563305.779217	CAKTam2wYr5rMwjeyh	192.168.1.103	1388	151.207.243.129	80	tcp	http	21.274408	2523	174678	S3	-	-	0	ShADadtf	117	7987	136	180126	(empty)
+1258562685.753831	Ch46TK298df1NRsaDi	192.168.1.104	1422	69.147.86.184	80	tcp	http	1066.603117	793	244265	S1	-	-	0	ShADd	1953	78921	1952	322621	(empty)
+1258563751.463261	CIdsXG2ZiUJVsvgGU4	192.168.1.103	1445	199.7.51.190	80	tcp	http	1.857389	198	314640	S1	-	-	0	ShADd	45	2006	229	323804	(empty)
+#close	2018-12-31-15-22-01
