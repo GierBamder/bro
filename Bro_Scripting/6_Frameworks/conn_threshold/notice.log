@@ -1,0 +1,12 @@
+#separator \x09
+#set_separator	,
+#empty_field	(empty)
+#unset_field	-
+#path	notice
+#open	2018-12-31-15-40-32
+#fields	ts	uid	id.orig_h	id.orig_p	id.resp_h	id.resp_p	fuid	file_mime_type	file_desc	proto	note	msg	sub	src	dst	p	n	peer_descr	actions	suppress_for	dropped	remote_location.country_code	remote_location.region	remote_location.city	remote_location.latitude	remote_location.longitude
+#types	time	string	addr	port	addr	port	string	string	string	enum	enum	string	string	addr	addr	port	count	string	set[enum]	interval	bool	string	string	string	double	double
+1258562998.356203	CiaxHZ1JxAFxhSfMZ4	192.168.1.104	1422	69.147.86.184	80	-	-	-	tcp	LARGE_TRANSFER_DETECTOR::Large_Transfer	Large transfer from 192.168.1.104:1422 to 69.147.86.184:80 of threshold 100000	-	192.168.1.104	69.147.86.184	80	-	bro	Notice::ACTION_LOG	3600.000000	F	-	-	-	-	-
+1258563311.969878	C3uVIW3DN03of7WSkk	192.168.1.103	1388	151.207.243.129	80	-	-	-	tcp	LARGE_TRANSFER_DETECTOR::Large_Transfer	Large transfer from 192.168.1.103:1388 to 151.207.243.129:80 of threshold 100000	-	192.168.1.103	151.207.243.129	80	-	bro	Notice::ACTION_LOG	3600.000000	F	-	-	-	-	-
+1258563752.593850	CJJb2x1qiNnIZDn8uf	192.168.1.103	1445	199.7.51.190	80	-	-	-	tcp	LARGE_TRANSFER_DETECTOR::Large_Transfer	Large transfer from 192.168.1.103:1445 to 199.7.51.190:80 of threshold 100000	-	192.168.1.103	199.7.51.190	80	-	bro	Notice::ACTION_LOG	3600.000000	F	-	-	-	-	-
+#close	2018-12-31-15-40-33
