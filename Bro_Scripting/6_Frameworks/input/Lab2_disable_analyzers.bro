@@ -44,7 +44,7 @@ event disable_analyzer_ev(description: Input::EventDescription, t: Input::Event,
 		return;
 	}
 
-	Analyzer::disable_analyzer(config_tab_map[data$protocol]);
+	Analyzer::disable_analyzer(config_tag_map[data$protocol]);
 }
 
 event bro_init() {
