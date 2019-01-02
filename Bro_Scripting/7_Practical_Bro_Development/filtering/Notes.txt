@@ -1,0 +1,110 @@
+# Overview
+
+-Filtering is part of the logging framework
+
+-Very powerful with some caveats
+
+-Under documented, under leveraged and, somewhat, misunderstood
+
+-Should be a first thought before creating a new log file containing anything duplicated from another log
+	-Down selecting
+
+-Easy way to route subsets of data to different writers
+
+
+# Usage Scenarios
+
+-Prevent logging of data that cannot be logged for privacy reason
+
+-Log cleanup
+	-Consistency verfication: everything has a timestamp, username exists for a credentials log, etc.
+
+-Shunting
+
+-Splitting data out for a different writer
+	-AMQP
+	-Kafka
+
+# Considerations
+
+-All logs (Log::ID) have a filter: "default"
+
+-Patterns to determine content are vital for filtering
+
+-to_lower() and to_upper() help simplify patterns
+	-You must be specific for your filtering functions and handlers
+
+-When deploying filtering, consider having &redef consts that may be enabled or disabled on a given Sensor and for Debugging.
+
+
+# Log Filter Functions
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Function                                                                     Description
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+function Log::add_filter(id: Log::ID, filter: Log::Filter) : bool            Adds a custom filter to an existing logging stream. If a filter with a matching name field already exists for the stream,
+                                                                             it is removed when the new filter is successfully added.
+function Log::remove_filter(id: Log::ID, name: string) : bool                Removes a filter from an existing logging stream.
+function Log::get_filter (id: Log::ID, name: string) : Log::Filter           Gets a filter associated wiht an existing logging stream.
+function Log::remove_default_filter(id: Log::ID, name: string): Log::Filter  Removes the Log::filter with name field equal to "default".
+function Log::add_default_filter(id: Log::ID) : bool                         Adds a default Log::Filter record with name field set as "default" to a given logging stream.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+# record Log::Filter (Abridged)
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Field                                                                         Description
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+name: string                                                                  Descriptive name to reference this filter.
+writer: Log::Writer &default = Log::default_writer &optional                  The logging writer implementation to use.
+pred: function(rec: any) : bool &optional                                     Indicates whether a log entry should be recorded. If not given, all entries are recorded
+path: string &optional                                                        Output path for recording entries matching this filter
+path_func: function (id: Log::ID, path: string, rec: any): string & optional  A function returning the output path for recording entries matching this filter. This is similar to path yet allows to compute the string dynamically
+include: set [string] &optional                                               Subset of column names to record. If not given, all columns are recorded
+exclude: set [string] &optional                                               Subset of column names to exclude from recording. If not given, all columns are recorded.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+# Function Log::Filter::pred Arguments
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Argument       Description
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+rec            An instance of the stream's colum;ns type with its fields set tot he values to be logged. e.g. Files::Info, HTTP::Info, etc.
+returns        True (T) if the entry is to be recorded, else False (F) to skip it.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+# Template for Predicate
+function filter_pred(rec: <Log::ID record - e.g. HTTP::Info>): bool
+{
+	if (< initial test > )
+		return T;
+	# Else fall through, we don't want it...
+	return F;
+}
+
+event bro_init() &priority=-10
+{
+	local filt = Log::get_filter(<Log::ID of Interest>, "default");
+	filt$pred=filter_pred;
+	Log::add_filter(<Log::ID of Interest>, filt);
+}
+
+# Template with Exclude
+event bro_init() &priority=-10
+{
+	local filt = Log::get_filter(<Log::ID of Interest>, "default");
+	filt$exclude=set( <Fields in Log::ID in question> );
+	Log::add_filter(<Log::ID of Interest>, filt);
+}
+
+# Template with Include
+event bro_init() &priority=-10
+{
+	local filt = Log::get_filter(<Log::ID of Interest>, "default");
+ 	filt$include=set( <Fields in Log::ID in question>[, <Field in Log::ID in question>, ...]);
+ 	Log::add_filter(<Log::ID of Interest>, filt);
+}
+
+
+
+
