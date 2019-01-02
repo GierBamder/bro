@@ -1,0 +1,50 @@
+# Overview
+
+-Why?
+	-Create a custom Framework that other scripts may "subscribe" to - Bulk::connection_detected(...)
+	-Prioritize calls via &priority
+	-Adhere to the same rules as any other event - multiple callbacks are possible
+
+-Where?
+	-Anywhere that outside scripts may interact
+	-Usually loadable via local.bro and extended from that point
+
+-When?
+	-Think of it as an API that can be called by a third-party within your sensor
+
+
+# How to call an event
+-From the event engine (Normal bro functionality)
+	-When the event engine detects an event for which you have defined a corresponding event handler, it queues an event for that handler.
+	The handler is invoked as soon as the event engine finishes processing the current packet and flushing the invocation of other event handlers that were queued first.
+
+-With the event statement from a script
+	event my_custom_evt(c: connection)
+
+
+# Schedule
+-Schedule is another means of calling an event
+
+-Schedule calls the event at some point (interval) in the future
+	-Assume this will happen in your event handlers
+
+-Schedule must re-schedule itself in order for execution to occur indefinitely
+
+-Usage:
+	schedule <interval> { <event> };
+
+-Example:
+event heartbeat()
+{
+	# Write out a heartbeat message
+	#
+	schedule 5min { heartbeat() };
+}
+
+event bro_init()
+{
+	schedule 5min { heartbeat() };
+}
+
+
+
