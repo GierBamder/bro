@@ -1,0 +1,40 @@
+Course Wrap Up
+read:Beyond this Course
+Optional
+
+Consider the following to extend your Bro knowledge beyond this course.
+
+Repositories of Interest
+
+    https://github.com/packetsled
+    https://github.com/sooshie/bro-scripts
+    https://github.com/securitykitten/bro_scripts
+    https://github.com/jshlbrd/bro-scripts
+    https://github.com/hosom
+    https://github.com/phirelight/bro-scripts
+    https://github.com/gitunique/bro-scripts
+    https://github.com/BrashEndeavours/bro-scripts
+    https://github.com/securitykitten/bro_scripts
+    https://github.com/reservoirlabs/bro-scripts
+    https://github.com/aeppert/bro_scripts
+
+Manual
+
+	https://www.bro.org/sphinx
+
+Script Reference
+
+	https://www.bro.org/sphinx/script-reference
+
+Bro Community Information
+
+	https://www.bro.org/community/
+
+Mailing Lists
+
+	http://mailman.icsi.berkeley.edu/mailman/listinfo/bro
+
+	http://mailman.icsi.berkeley.edu/mailman/listinfo/bro-dev
+
+
+
